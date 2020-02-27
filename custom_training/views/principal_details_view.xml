@@ -1,0 +1,86 @@
+<odoo>
+    <record id="principal_details_tree" model="ir.ui.view">
+        <field name="name">principal.details.tree</field>
+        <field name="model">principal.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="dept"/>
+                <field name="college" />
+                <field name="dob"/>
+                <field name="panid"/>
+                <field name="panno"/>
+                <field name="notes"/>
+                <field name="princ_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="principal_details_form" model="ir.ui.view">
+        <field name="name">principal.details.form</field>
+        <field name="model">principal.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="dept" />
+                            <field name="panid"/>
+                        </group>
+                        <group>
+                            <field name="age" />
+                            <field name="college" widget='selection'/>
+                            <field name="dob"/>
+                            <field name="panno"/>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                        <group>
+                            <field name="teacher_ids1" widget='many2many_checkboxes'/>
+                        </group>
+                    </group>
+                    <field name="princ_id"  widget='statusbar'>
+                                <tree>
+                                    <field name="account" widget='progressbar'/>
+                                    <field name="payment" />
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="account" />
+                                            </group>
+                                            <group>
+                                                <field name="payment" />
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="principal_details_action" model="ir.actions.act_window">
+        <field name="name">principal Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">principal.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="principal_details_tree"/> <!-- Force empty -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product
+            </p><p>
+            You must define a product for everything you sell or purchase,
+            whether it's a storable product, a consumable or a service.
+        </p>
+        </field>
+    </record>
+
+
+
+</odoo>

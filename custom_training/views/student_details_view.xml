@@ -1,0 +1,77 @@
+<odoo>
+    <record id="student_details_tree" model="ir.ui.view">
+        <field name="name">student.details.tree</field>
+        <field name="model">student.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="dob"/>
+                <field name="select_gender"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="student_details1_form" model="ir.ui.view">
+        <field name="name">student.details.form</field>
+        <field name="model">student.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                     <field name="select_gender" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="age" />
+                        </group>
+                        <group>
+                            <field name="dob"/>
+                            <field name="upload_dob" filename="dob_file_name" />
+                            <field name="dob_file_name" invisible="1" />
+                            <!--<field name="select"/>-->
+                            <field name="principal_id"/>
+                        </group>
+                        <group>
+                            <field name="teacher_ids" widget='many2many_checkboxes'/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sem">
+                            <field name="marks_ids" >
+                                <tree editable="bottom" >
+                                    <field name="select_sem" />
+                                    <field name="english" />
+                                    <field name="math" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="student_details_action" model="ir.actions.act_window">
+        <field name="name">Student Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">student.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="student_details_tree"/> <!-- Force empty -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product
+            </p><p>
+            You must define a product for everything you sell or purchase,
+            whether it's a storable product, a consumable or a service.
+        </p>
+        </field>
+    </record>
+
+
+
+</odoo>

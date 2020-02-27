@@ -1,0 +1,37 @@
+<odoo>
+
+    <menuitem id="school_details_menu" name="School Details"/>
+
+    <menuitem id="teacher_details_main_menu" name="Teacher Main Details"
+              sequence="1" parent="school_details_menu"/>
+
+
+     <menuitem id="teacher_details_menu" name="Teacher Details"
+              action="custom_training.teacher_details_action"
+              parent="teacher_details_main_menu" sequence="2" groups="base.group_system"/>
+
+
+       <menuitem id="principal_details_main_menu" name="Principal Main Details"
+              sequence="2" parent="school_details_menu" groups="base.group_system"/>
+
+    <menuitem id="principal_details_menu" name="Principal Details"
+              action="custom_training.principal_details_action"
+              parent="principal_details_main_menu" sequence="2" groups="base.group_system"/>
+
+     <menuitem id="student_details_main_menu" name="Student Main Details"
+              sequence="3" parent="school_details_menu" groups="base.group_system"/>
+
+    <menuitem id="student_details_menu" name="Student Details"
+              action="custom_training.student_details_action"
+              parent="student_details_main_menu" sequence="5" groups="base.group_system"/>
+
+    <menuitem id="student_details_main2_menu" name="Student Main Details Out"
+              sequence="4" parent="school_details_menu" groups="base.group_system"/>
+
+    <menuitem id="student_details_menu2" name="Student Details Out"
+              action="custom_training.student_line_action"
+              parent="student_details_main2_menu" sequence="5" groups="base.group_system"/>
+
+
+
+</odoo>

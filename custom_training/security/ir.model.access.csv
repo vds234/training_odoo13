@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_details,access.student.details,custom_training.model_student_details,base.group_user,1,1,1,1
+access_teacher_details,access.teacher.details,custom_training.model_teacher_details,base.group_user,1,1,1,1
+access_principal_details,access.principal.details,custom_training.model_principal_details,base.group_user,1,1,1,1
+access_student_details_line,access.student.details.line,custom_training.model_student_details_line,base.group_user,1,1,1,1
+access_principal_details_line,access.principal.details.line,custom_training.model_principal_details_line,base.group_user,1,1,1,1
+access_teacher_details_line,access.teacher.details.line,custom_training.model_teacher_details_line,base.group_user,1,1,1,1
