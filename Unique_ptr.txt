@@ -1,0 +1,108 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+template<typename T>
+class MyUniquePtr
+{
+    private:
+        T* ptr;
+    public:
+        //constructor
+        MyUniquePtr():ptr(nullptr){}
+        MyUniquePtr(T* p):ptr(p){}
+        
+        //Disable copy constructor and copy assignment operator
+        MyUniquePtr(const MyUniquePtr&) =delete;
+        MyUniquePtr& operator=(MyUniquePtr&) =delete;
+        
+        //Move constructor and Move assignment operator
+        MyUniquePtr(MyUniquePtr&& other)noexcept:ptr(other.ptr)
+        {
+            other.ptr = nullptr;
+        }
+        
+        MyUniquePtr& operator=(MyUniquePtr&& other)noexcept
+        {
+            if (this!=&other)
+            {
+                delete ptr;
+                ptr=other.ptr;
+                other.ptr = nullptr;
+            }
+            return *this;
+        }
+        
+        T& operator*() const{
+            if(ptr)
+                return *ptr;
+            else
+                throw std::runtime_error("Dereferencing a nullptr results in undefined behavious!");
+        }
+        
+        T* get() const{
+            return ptr;
+        }
+        
+        T* release() const noexcept
+        {
+            T* temp = ptr;
+            delete ptr;
+            return temp;
+        }
+        
+        void reset(T* p = nullptr) noexcept
+        {
+            if(ptr!=p)
+            {
+                delete ptr;
+                ptr = p;
+            }
+        }
+};
+
+int main()
+{
+    //case 1:
+    MyUniquePtr<int> p1;
+    //cout << "default pointer:" << *p1;  //undefined behavioour.
+    cout << "Get The raw Pointer:" << p1.get() << endl;
+    
+    //case 2:
+    MyUniquePtr<int> p2(new int(40));
+    cout << "pointer 1:" << *p2 << endl;
+    cout << "pointer Address:" << &p2 << endl;
+    
+    //case 3:
+    // MyUniquePtr<int> p3 = p2;
+    // cout << "pointer 2:" << *p3 << endl;
+    // cout << "pointer Address:" << &p3 << endl;
+    // std::cout<<"Hello World";
+    // MyUniquePtr<int> p4;
+    // p4=p2;
+    
+    //case 4:
+    MyUniquePtr<int> p4 = std::move(p2);
+    cout << "Pointer 4:" << *p4;
+    
+    MyUniquePtr<int> p5;
+    p5=std::move(p4);
+    cout << "Pointer 5:" << *p5;
+    
+    //case 5:
+    cout << "New Raw pointer:"<<p5.release();
+    
+    cout << "Raw Pointer:" << p5.get();
+    
+    cout << "Access P5:" << *p5;
+    p2.reset(new int(100));
+    cout << "Pointer:" << *p2;
+
+    return 0;
+}
